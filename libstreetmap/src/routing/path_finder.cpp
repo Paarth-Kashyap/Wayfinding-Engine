@@ -136,6 +136,18 @@ bool astarPath(IntersectionIdx src, IntersectionIdx dest, const double turn_pena
                 double travelTime = calcTotalTime(turn_penalty, wave, outEdge);   //get the travel time to the next intersection
                 double aerialTime = getAerialTravelTime(toNode, dest);    //get the aerial distance travel time to the destination
                 minHeapWave.push(waveElemAStar(toNode, outEdge, travelTime, aerialTime + travelTime));
+
+                // Live visualization: draw the edge being explored, flush the
+                // frame, and pause briefly so the wavefront is visible.
+                if (search_vis_enabled && search_vis_renderer && search_vis_app) {
+                    search_vis_renderer->set_color(ezgl::RED);
+                    search_vis_renderer->set_line_width(2);
+                    search_vis_renderer->draw_line(segments[outEdge].start_xy,
+                                                   segments[outEdge].end_xy);
+                    search_vis_app->flush_drawing();
+                    if (search_vis_delay_ms > 0)
+                        visualDelay(search_vis_delay_ms);
+                }
              }
         }
     }     

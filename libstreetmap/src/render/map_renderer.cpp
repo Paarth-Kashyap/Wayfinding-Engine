@@ -21,6 +21,7 @@ bool emergency_POIs = false;
 bool subway_station_POIs = false;
 bool help_popup = false;
 bool show_my_path=false; 
+bool visualize_search = false; // animate A* exploration when true
 
 double worldWidth;
 double worldHeight; 
@@ -40,6 +41,12 @@ std::pair<IntersectionIdx, IntersectionIdx> intersection_for_path (-1, -1);
 std::string current_direction = "";
 std::string next_direction = "";
 std::stringstream dir;
+
+/* ---- A* search visualization state ---- */
+bool               search_vis_enabled = false;
+ezgl::application* search_vis_app = nullptr;
+ezgl::renderer*    search_vis_renderer = nullptr;
+int                search_vis_delay_ms = 1;
 
 void drawMap() {
    // Create the ezgl application

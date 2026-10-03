@@ -256,6 +256,17 @@ double getAerialTravelTime(IntersectionIdx, IntersectionIdx);
 bool astarPath(IntersectionIdx, IntersectionIdx, const double);
 void dijkstraExpansion(float turn_penalty, IntersectionIdx,const std::unordered_set<IntersectionIdx>&);
 
+/* ---- A* search visualization ----
+   When search_vis_enabled is true, astarPath draws each edge it explores onto
+   search_vis_renderer and flushes the frame, so the user can watch the
+   wavefront expand before the final path is shown. The UI sets these before
+   invoking a route and clears them afterwards. All null/false by default so
+   routing stays fast unless visualization is explicitly turned on. */
+extern bool                search_vis_enabled;
+extern ezgl::application*  search_vis_app;
+extern ezgl::renderer*     search_vis_renderer;
+extern int                 search_vis_delay_ms; // per-step delay in milliseconds
+
 
 //BFS trace back algorithm
 //takes in the source intersection index and the destination intersection index

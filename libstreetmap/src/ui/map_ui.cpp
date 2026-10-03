@@ -7,6 +7,28 @@
    UI / callback / directions code moved from m2.cpp (no behavior change). */
 
 //------------------------------------------------
+// A* search visualization helpers
+//------------------------------------------------
+
+// Arm the A* visualization if the user has it enabled, drawing onto the given
+// application's renderer. Clears the canvas to the current map first so the
+// exploration animation starts from a clean frame.
+static void begin_search_vis(ezgl::application* app){
+   if(!visualize_search || app == nullptr) return;
+   app->refresh_drawing();                 // redraw base map so animation is visible
+   search_vis_app = app;
+   search_vis_renderer = app->get_renderer();
+   search_vis_enabled = (search_vis_renderer != nullptr);
+}
+
+// Disarm visualization after the search completes.
+static void end_search_vis(){
+   search_vis_enabled = false;
+   search_vis_app = nullptr;
+   search_vis_renderer = nullptr;
+}
+
+//------------------------------------------------
 // UI text helpers
 //------------------------------------------------
 
@@ -134,7 +156,9 @@ void act_on_mouse_click(ezgl::application* app, GdkEventButton* /*event*/, doubl
 
       dir.str("");
 
+      begin_search_vis(app);
       my_path = findPathBetweenIntersections(15, intersection_for_path);
+      end_search_vis();
       my_path_start_end=intersection_for_path;
       show_my_path=true;
 
@@ -291,6 +315,7 @@ void initial_setup (ezgl::application* application, bool /*new_window*/){
 
    // Create new buttons
    application->create_button ("Dark Mode", 6, toggle_dark_mode);
+   application->create_button ("Visualize Search", 7, toggle_visualize);
    application->create_button ("Show Leisure POIs", 0, 12, 1, 2, toggle_leisure);
    application->create_button ("Show Food POIs", 1, 12, 1, 2, toggle_food);
    application->create_button ("Show Driving POIs", 2, 12, 1, 2, toggle_driving);
@@ -510,6 +535,12 @@ void combo_box_cbk(GtkComboBoxText* self, ezgl::application* app){
 void toggle_dark_mode (GtkWidget* /*widget*/, ezgl::application* application){
    dark_mode = !dark_mode;
    apply_dark_class(application, dark_mode); // restyle the control panel too
+   application->refresh_drawing();
+}
+
+// Toggle live animation of the A* search when a route is computed.
+void toggle_visualize (GtkWidget* /*widget*/, ezgl::application* application){
+   visualize_search = !visualize_search;
    application->refresh_drawing();
 }
 
@@ -743,7 +774,9 @@ void toggle_find (GtkWidget* /*widget*/, ezgl::application* application){
          dir.str("");
 
 
+         begin_search_vis(application);
          my_path = findPathBetweenIntersections(15.00, navigation_pair);
+         end_search_vis();
          my_path_start_end = navigation_pair;
          show_my_path=true;
 

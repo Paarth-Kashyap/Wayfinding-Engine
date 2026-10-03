@@ -34,6 +34,7 @@ void toggle_school (GtkWidget* /*widget*/, ezgl::application* application);
 void toggle_emergency (GtkWidget* /*widget*/, ezgl::application* application);
 void toggle_subway_stations (GtkWidget* /*widget*/, ezgl::application* application);
 void toggle_help (GtkWidget* /*widget*/, ezgl::application* application);
+void toggle_visualize (GtkWidget* /*widget*/, ezgl::application* application);
 void combo_box_cbk(GtkComboBoxText* self, ezgl::application* app);
 
 void draw_intersections(ezgl::renderer *);
@@ -84,6 +85,7 @@ extern bool emergency_POIs;
 extern bool subway_station_POIs;
 extern bool help_popup;
 extern bool show_my_path;
+extern bool visualize_search; // user toggle: animate A* exploration
 
 extern double worldWidth;
 extern double worldHeight;
