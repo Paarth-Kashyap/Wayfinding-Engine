@@ -4,6 +4,7 @@ An interactive map viewer and route-planning application for OpenStreetMap
 data. It renders cities as a pannable, zoomable map and computes
 shortest-time driving routes between intersections, with turn-by-turn
 directions.
+<img width="1035" height="693" alt="image" src="https://github.com/user-attachments/assets/616a2cc5-b76b-419c-a003-f962d0e14138" />
 
 ## Features
 
