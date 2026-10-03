@@ -1,0 +1,192 @@
+/* Wayfinding Engine — minimalist, Google-Maps-inspired GTK theme.
+   Loaded at startup via a GtkCssProvider (see initial_setup in m2.cpp).
+   Light by default; the window gets the ".dark" style class when the
+   Dark Mode toggle is on. */
+
+/* ---- Base ---- */
+window,
+grid {
+  background-color: #ffffff;
+  color: #202124;
+  font-family: "Roboto", "Noto Sans", "Arial", sans-serif;
+  font-size: 13px;
+}
+
+/* Side control panel feels like a clean card */
+#InnerGrid {
+  background-color: #ffffff;
+  padding: 10px;
+  border-left: 1px solid #e8eaed;
+}
+
+/* ---- Buttons ---- */
+button {
+  background-image: none;
+  background-color: #ffffff;
+  color: #3c4043;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 6px 12px;
+  margin: 3px;
+  box-shadow: none;
+  transition: background-color 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+button:hover {
+  background-color: #f1f3f4;
+  border-color: #d2d5da;
+}
+button:active,
+button:checked {
+  background-color: #e8f0fe;
+  color: #1a73e8;
+  border-color: #d2e3fc;
+}
+button:focus {
+  outline: none;
+}
+
+/* ---- Text entries & search ---- */
+entry {
+  background-color: #ffffff;
+  color: #202124;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin: 3px;
+  caret-color: #1a73e8;
+}
+entry:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.18);
+}
+entry image {               /* search icon */
+  color: #5f6368;
+}
+
+/* ---- Combo box (map chooser) ---- */
+combobox box.linked > button,
+combobox button {
+  background-color: #ffffff;
+  color: #3c4043;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin: 3px;
+}
+combobox button:hover {
+  background-color: #f1f3f4;
+}
+combobox arrow {
+  color: #5f6368;
+  min-width: 14px;
+  min-height: 14px;
+}
+/* The popup list of cities */
+combobox window.popup,
+combobox window.popup decoration {
+  background-color: #ffffff;
+  border: 1px solid #e8eaed;
+  border-radius: 8px;
+}
+combobox window.popup menuitem,
+combobox cellview {
+  padding: 6px 10px;
+  color: #202124;
+}
+combobox window.popup menuitem:hover {
+  background-color: #e8f0fe;
+  color: #1a73e8;
+}
+
+/* ---- Completion popups for street search ---- */
+treeview,
+.completion {
+  background-color: #ffffff;
+  color: #202124;
+}
+treeview:selected,
+.completion:selected {
+  background-color: #e8f0fe;
+  color: #1a73e8;
+}
+
+/* ---- Directions / text view ---- */
+textview,
+textview text {
+  background-color: #f8f9fa;
+  color: #202124;
+  border-radius: 8px;
+  padding: 6px;
+}
+
+scrolledwindow {
+  border: 1px solid #e8eaed;
+  border-radius: 8px;
+}
+
+/* ---- Status bar ---- */
+statusbar {
+  background-color: #ffffff;
+  color: #5f6368;
+  border-top: 1px solid #e8eaed;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+/* ============================================================
+   Dark theme — applied when the window has the ".dark" class
+   ============================================================ */
+window.dark,
+window.dark grid,
+window.dark #InnerGrid {
+  background-color: #202124;
+  color: #e8eaed;
+  border-left-color: #3c4043;
+}
+window.dark button {
+  background-color: #292a2d;
+  color: #e8eaed;
+  border-color: #3c4043;
+}
+window.dark button:hover {
+  background-color: #35363a;
+}
+window.dark button:active,
+window.dark button:checked {
+  background-color: #283b57;
+  color: #8ab4f8;
+  border-color: #3b5a80;
+}
+window.dark entry,
+window.dark combobox button {
+  background-color: #292a2d;
+  color: #e8eaed;
+  border-color: #3c4043;
+}
+window.dark entry:focus {
+  border-color: #8ab4f8;
+  box-shadow: 0 0 0 2px rgba(138, 180, 248, 0.22);
+}
+window.dark textview,
+window.dark textview text {
+  background-color: #292a2d;
+  color: #e8eaed;
+}
+window.dark statusbar {
+  background-color: #202124;
+  color: #9aa0a6;
+  border-top-color: #3c4043;
+}
+window.dark combobox window.popup,
+window.dark combobox window.popup decoration {
+  background-color: #292a2d;
+  border-color: #3c4043;
+}
+window.dark combobox window.popup menuitem {
+  color: #e8eaed;
+}
+window.dark combobox window.popup menuitem:hover,
+window.dark treeview:selected {
+  background-color: #283b57;
+  color: #8ab4f8;
+}
